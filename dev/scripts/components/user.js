@@ -10,7 +10,9 @@ class User extends Component {
 
     render() {
         return(
-            <div>was up?</div>
+            <div key={this.props.user.id}>
+                <p>{this.props.user.name}</p>
+            </div>
         )
     }
 }

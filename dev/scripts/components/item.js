@@ -10,8 +10,10 @@ class Item extends Component {
 
     render() {
         return(
-            <div>was up?</div>
-        )
+            <div className={this.props.item.box_id?"itemNotDraggable":"itemContainer"}>
+                <p>{this.props.item.name}</p>
+                <p>{this.props.item.weight}</p>
+            </div>)
     }
 }
 

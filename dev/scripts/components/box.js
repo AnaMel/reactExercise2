@@ -10,7 +10,10 @@ class Box extends Component {
 
     render() {
         return(
-            <div>was up?</div>
+            <div>
+                <p>box name: {this.props.box.name}</p>
+                <p>total weight: {this.props.box.total_allowed_weight}</p>
+            </div>
         )
     }
 }
