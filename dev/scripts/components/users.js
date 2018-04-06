@@ -7,38 +7,28 @@ class Users extends Component {
         this.state = {
             users: []
         }
-        this.guid = this.guid.bind(this);
-        this.s4 = this.s4.bind(this);
     }
 
-    //Function to generate unique GUID id for a new user object 
-    guid() {
-        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
-          this.s4() + '-' + this.s4() + this.s4() + this.s4();
-    }
-      
-    s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
 
     componentDidMount() {
-        const users =[];
-        const user = {
-          id: this.guid(),
-          name: 'test'
-        };
-        users.push(user);
-        this.setState({
-            users
-        })
+        const dbref = firebase.database().ref(`/users`);
+        dbref.on('value', (snapshot) => {
+            const users = snapshot.val();
+            const copyOfUsers = [];
+            for (let key in users) {
+                users[key].key = key;
+                copyOfUsers.push(users[key]);
+            }
+            this.setState({
+                users: copyOfUsers
+            });
+        });
     }
 
     render() {
         return(
             <div>
-                {this.state.users.map((user) => <User key={user.id} user={user} />)}
+                {this.state.users.map((user) => <User user={user}/>)}
             </div>
         )
     }

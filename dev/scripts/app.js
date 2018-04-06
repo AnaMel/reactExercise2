@@ -23,6 +23,23 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const dbref = firebase.database().ref('/users');
+    const myUser = dbref.push();
+    const connectedRef = firebase.database().ref(".info/connected");
+    connectedRef.on("value", function(snap) {
+      if (snap.val() === true) {
+        myUser.onDisconnect().remove();
+        myUser.set({
+          name: prompt('Please enter your name')
+        });
+      } 
+      // else {
+      //   alert("not connected");
+      // }
+    });
+  }
+
   render() {
     return (
       <div>
