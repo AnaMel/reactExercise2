@@ -19,19 +19,16 @@ class BoxList extends Component {
     onDrop(e,boxId,boxAvailableSpace) {
         let id = e.dataTransfer.getData("id");
         let weight = e.dataTransfer.getData("weight");
-
-        let item = {
-            box_id:boxId
+        
+        if((parseInt(boxAvailableSpace) - parseInt(weight))<0){
+            console.log("not enough space")
         }
-
-        let updatedWeight = boxAvailableSpace - weight;
-        let box = {
-            total_allowed_weight: updatedWeight
+        else {
+            let item = {
+                box_id:boxId
+            }
+            firebase.database().ref('/items').child(id).update(item)
         }
-
-        console.log(name);
-        firebase.database().ref('/items').child(id).update(item);
-        firebase.database().ref('/boxes').child(boxId).update(box);
     }
 
     // Pull list of boxes once boxList component mounted
