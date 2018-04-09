@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { DragAndDrop } from 'simple-react-dnd';
 
 import ItemsList from './components/itemsList';
 import Users from './components/users';
@@ -19,7 +20,8 @@ firebase.initializeApp(config);
 class App extends React.Component {
   constructor() {
     super();
-    this.state ={
+    this.state = {
+      items: []
     }
   }
 
@@ -38,17 +40,31 @@ class App extends React.Component {
       //   alert("not connected");
       // }
     });
+    firebase.database().ref(`/items`).on('value', (snapshot) => {
+            const items = snapshot.val();
+            const copyOfItems = [];
+            for (let key in items) {
+                items[key].key = key;
+                copyOfItems.push(items[key]);
+            }
+            this.setState({
+                items: copyOfItems  
+            });
+        });
   }
 
   render() {
     return (
       <div>
         <Users />
-        <ItemsList />
-        <BoxList />
+        <section>
+          <ItemsList items={this.state.items} />
+          <BoxList />
+        </section>
       </div>
     )
   }
 }
 
+export default DragAndDrop(App);
 ReactDOM.render(<App />, document.getElementById('app'));

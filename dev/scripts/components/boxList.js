@@ -1,18 +1,42 @@
 import React, { Component} from 'react';
 import Box from './box';
 
+import ItemsList from './itemsList';
+
 class BoxList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            boxes: []
+            boxes: [],
+            boxedItems: []
         }
+    }
+
+    onDragOver(e) {
+        e.preventDefault();
+    }
+
+    onDrop(e,boxId,boxAvailableSpace) {
+        let id = e.dataTransfer.getData("id");
+        let weight = e.dataTransfer.getData("weight");
+
+        let item = {
+            box_id:boxId
+        }
+
+        let updatedWeight = boxAvailableSpace - weight;
+        let box = {
+            total_allowed_weight: updatedWeight
+        }
+
+        console.log(name);
+        firebase.database().ref('/items').child(id).update(item);
+        firebase.database().ref('/boxes').child(boxId).update(box);
     }
 
     // Pull list of boxes once boxList component mounted
     componentDidMount(){
-        const dbref = firebase.database().ref(`/boxes`);
-        dbref.on('value', (snapshot) => {
+        firebase.database().ref(`/boxes`).on('value', (snapshot) => {
             const boxes = snapshot.val();
             const copyOfBoxes = [];
             for (let key in boxes) {
@@ -23,12 +47,27 @@ class BoxList extends Component {
                 boxes: copyOfBoxes
             });
         });
+        firebase.database().ref(`/items`).on('value', (snapshot) => {
+            const items = snapshot.val();
+            const copyOfBoxedItems = [];
+            for (let key in items) {
+                items[key].box_id!=null?
+                (
+                    items[key].key = key,
+                    copyOfBoxedItems.push(items[key])
+                )
+                : null
+            }
+            this.setState({
+                boxedItems: copyOfBoxedItems
+            });
+        });
     }
 
     render() {
         return(
             <div>
-                {this.state.boxes.map((box) => <Box key={box.id} box={box}/>)}
+                {this.state.boxes.map((box) => <Box key={box.box_id} box={box} onDragOver={this.onDragOver} onDrop={this.onDrop} boxedItems={this.state.boxedItems} />)}
             </div>
         )
     }
