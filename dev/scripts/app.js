@@ -58,7 +58,7 @@ class App extends React.Component {
       <div>
         <Users />
         <section>
-          <ItemsList items={this.state.items} />
+          <ItemsList items={this.state.items} itemPacked={false} />
           <BoxList />
         </section>
       </div>

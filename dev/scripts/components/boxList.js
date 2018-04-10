@@ -21,7 +21,7 @@ class BoxList extends Component {
         let weight = e.dataTransfer.getData("weight");
         
         if((parseInt(boxAvailableSpace) - parseInt(weight))<0){
-            console.log("not enough space")
+            alert("not enough space");
         }
         else {
             let item = {

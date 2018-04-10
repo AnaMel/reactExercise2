@@ -31,7 +31,7 @@ class Box extends Component {
                     }
                 </p>
                 <div>
-                    {<ItemsList items={itemsInBox} />}
+                    {<ItemsList items={itemsInBox} itemPacked={true} />}
                 </div>
             </div>
         )
