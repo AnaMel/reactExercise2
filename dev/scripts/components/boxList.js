@@ -10,6 +10,8 @@ class BoxList extends Component {
             boxes: [],
             boxedItems: []
         }
+        this.onDragOver=this.onDragOver.bind(this);
+        this.onDrop=this.onDrop.bind(this);
     }
     // Function to prevent page reload when user drags an item over a box component
     onDragOver(e) {

@@ -6,6 +6,7 @@ class ItemsList extends Component {
     constructor(props) {
         super(props);
         this.handleClick=this.handleClick.bind(this);
+        this.onDragStart=this.onDragStart.bind(this);
     }
     // Create a function to capture data about the item once user starts dragging it
     onDragStart(e, id, weight) {
