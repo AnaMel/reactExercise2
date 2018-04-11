@@ -1,0 +1,44 @@
+.items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div {
+        padding: 30px;
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: $main-ltgrey;
+        background-color: $green;
+        position: relative;
+        transition: all 0.3s;
+        cursor: move;
+        &:hover,
+        &:focus {
+            background-color: $ltgreen;
+        }
+        a {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            &:hover,
+            &:focus,
+            &:visited {
+                color: $main-ltgrey;
+            }
+        }
+    }
+    .itemNotDraggable {
+        background-color: $main-grey;
+        color: $main-dark;
+        cursor: not-allowed;
+        &:hover,
+            &:focus {
+                background-color: $red;
+            }
+    }
+}
+

@@ -56,13 +56,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <main>
         <Users />
-        <section>
+        <section className="inventory">
           <ItemsList items={this.state.items} itemPacked={false} />
           <BoxList />
         </section>
-      </div>
+      </main>
     )
   }
 }

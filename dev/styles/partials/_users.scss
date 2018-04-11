@@ -1,0 +1,12 @@
+.users {
+    height: 10vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    div {
+        text-align: center;
+        color: $main-dark;
+        padding: 5px;
+        margin-right: 10px;
+    }
+}

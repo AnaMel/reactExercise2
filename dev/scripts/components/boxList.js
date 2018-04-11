@@ -25,7 +25,7 @@ class BoxList extends Component {
         // if weight of the dropped item exceeds available space
         if((parseInt(boxAvailableSpace) - parseInt(weight))<0){
             // then alert the user
-            alert("not enough space");
+            alert("Not enough space in the box.");
         }
         else {
             // else update item's box_id and push the update to firebase
@@ -66,7 +66,7 @@ class BoxList extends Component {
 
     render() {
         return(
-            <div>
+            <div className="boxes">
                 {this.state.boxes.map((box) => <Box key={box.box_id} box={box} onDragOver={this.onDragOver} onDrop={this.onDrop} boxedItems={this.state.boxedItems} />)}
             </div>
         )

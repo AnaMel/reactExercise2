@@ -21,7 +21,7 @@ class ItemsList extends Component {
     }
     render() {
         return(
-            <div>
+            <div className="items">
                 {this.props.items.map((item) => <Item key={item.id} item={item} onDragStart={this.onDragStart} handleClick={this.handleClick} itemPacked={this.props.itemPacked} />)}
             </div>
         )

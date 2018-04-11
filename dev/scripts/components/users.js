@@ -28,9 +28,10 @@ class Users extends Component {
 
     render() {
         return(
-            <div>
+            <section className="users">
+                <h2>Online Users:</h2>
                 {this.state.users.map((user) => <User key={user.key} user={user}/>)}
-            </div>
+            </section>
         )
     }
 }

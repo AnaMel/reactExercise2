@@ -25,13 +25,13 @@ class Box extends Component {
         let remainingWeight=parseInt(this.props.box.total_allowed_weight) - (parseInt(itemsWeight)||0);
         return(
             <div className="box" onDragOver={(e) => this.props.onDragOver(e)} onDrop={(e) => this.props.onDrop(e, this.props.box.box_id,remainingWeight)}>
-                <p>box name: {this.props.box.name}</p>
-                <p>total weight: {this.props.box.total_allowed_weight}</p>
-                <p>remaining space: {parseInt(this.props.box.total_allowed_weight) - (parseInt(itemsWeight)||0)}</p>
+                <p>Box Name: {this.props.box.name}</p>
                 <div>
                     {/* Use ItemsList component to render list of items in the box */}
                     {<ItemsList items={itemsInBox} itemPacked={true} />}
                 </div>
+                <p>t.w. {(parseInt(itemsWeight)||0)}/{this.props.box.total_allowed_weight}</p>
+                <p>remaining space {parseInt(this.props.box.total_allowed_weight) - (parseInt(itemsWeight)||0)}</p>
             </div>
         )
     }
