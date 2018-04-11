@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DragAndDrop } from 'simple-react-dnd';
-
 import ItemsList from './components/itemsList';
 import Users from './components/users';
 import BoxList from './components/boxList';
@@ -25,32 +23,34 @@ class App extends React.Component {
     }
   }
 
+  // Once component mounted
   componentDidMount() {
     const dbref = firebase.database().ref('/users');
     const myUser = dbref.push();
     const connectedRef = firebase.database().ref(".info/connected");
     connectedRef.on("value", function(snap) {
+      // validate if connection is established
       if (snap.val() === true) {
+        // remove the user's record on the disconnect
         myUser.onDisconnect().remove();
+        // then request user to enter their name
         myUser.set({
           name: prompt('Please enter your name')
         });
       } 
-      // else {
-      //   alert("not connected");
-      // }
     });
+    // retrieve list of items from firebase
     firebase.database().ref(`/items`).on('value', (snapshot) => {
-            const items = snapshot.val();
-            const copyOfItems = [];
-            for (let key in items) {
-                items[key].key = key;
-                copyOfItems.push(items[key]);
-            }
-            this.setState({
-                items: copyOfItems  
-            });
-        });
+      const items = snapshot.val();
+      const copyOfItems = [];
+      for (let key in items) {
+          items[key].key = key;
+          copyOfItems.push(items[key]);
+      }
+      this.setState({
+          items: copyOfItems  
+      });
+    });
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import User from './user';
 
+// Component responsible for rendering list of users connected to the page
 class Users extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +10,7 @@ class Users extends Component {
         }
     }
 
-
+    // Once component mounted retrive list of active users from firebase
     componentDidMount() {
         const dbref = firebase.database().ref(`/users`);
         dbref.on('value', (snapshot) => {

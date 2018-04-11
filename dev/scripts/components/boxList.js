@@ -1,8 +1,8 @@
 import React, { Component} from 'react';
 import Box from './box';
-
 import ItemsList from './itemsList';
 
+// Component responsible for rendering list of boxes
 class BoxList extends Component {
     constructor(props) {
         super(props);
@@ -11,27 +11,30 @@ class BoxList extends Component {
             boxedItems: []
         }
     }
-
+    // Function to prevent page reload when user drags an item over a box component
     onDragOver(e) {
         e.preventDefault();
     }
 
+    // Function triggered wher user drops an item into a box component
     onDrop(e,boxId,boxAvailableSpace) {
+        // retrieve id of the dropped item
         let id = e.dataTransfer.getData("id");
+        // retrieve weight of the dropped item
         let weight = e.dataTransfer.getData("weight");
-        
+        // if weight of the dropped item exceeds available space
         if((parseInt(boxAvailableSpace) - parseInt(weight))<0){
+            // then alert the user
             alert("not enough space");
         }
         else {
-            let item = {
-                box_id:boxId
-            }
+            // else update item's box_id and push the update to firebase
+            let item = {box_id:boxId}
             firebase.database().ref('/items').child(id).update(item)
         }
     }
 
-    // Pull list of boxes once boxList component mounted
+    // Pull list of boxes and items from Firebase once boxList component mounted
     componentDidMount(){
         firebase.database().ref(`/boxes`).on('value', (snapshot) => {
             const boxes = snapshot.val();

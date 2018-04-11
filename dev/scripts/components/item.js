@@ -1,26 +1,17 @@
 import React, { Component} from 'react';
-import { Drag } from 'simple-react-dnd';
 
-
-class Item extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-
-    render() {
-        return(
-            <div className={(this.props.item.box_id&&this.props.itemPacked)?"itemNotDraggable":"itemContainer"} onDragStart={(e) => this.props.onDragStart(e, this.props.item.id, this.props.item.weight)} draggable={this.props.item.box_id&&!this.props.itemPacked?false:true}  >
-                <p>{this.props.item.name}</p>
-                <p>{this.props.item.weight}</p>
-                {this.props.itemPacked?
-                <a href="#" onClick={(event) => this.props.handleClick(event, this.props.item.id)}><i className="fas fa-times eventFormControl link__black"></i></a>
-                :null
-                }
-            </div>)
-    }
+// Functional component responsible for rendering item information (name, weight)
+const Item = (props) => {
+    return(
+        <div className={(props.item.box_id&&props.itemPacked)?"itemNotDraggable":"itemContainer"} onDragStart={(e) => props.onDragStart(e, props.item.id, props.item.weight)} draggable={props.item.box_id&&!props.itemPacked?false:true}  >
+            <p>{props.item.name}</p>
+            <p>{props.item.weight}</p>
+            {/* Display 'remove' icon based on whether item is rendered in a global list of items or in a box */}
+            {props.itemPacked?
+            <a href="#" onClick={(event) => props.handleClick(event, props.item.id)}><i className="fas fa-times eventFormControl link__black"></i></a>
+            :null}
+        </div>
+    )
 }
 
 export default Item;
