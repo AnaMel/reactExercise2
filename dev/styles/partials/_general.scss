@@ -1,31 +1,19 @@
-.itemContainer {
-    background-color: grey;
-    width: 200px;
-}
-
-.itemNotDraggable{
-    background-color: salmon;
-    width: 200px;
-    margin: 5px;
-}
-
-section {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-// 
 main {
     display: flex;
     flex-direction: column;
 }
 
 .inventory {
-    height: 90vh;
     display: flex;
     justify-content: space-around;
-    div {
-        flex-basis: 40%;
+    padding: 50px 0;
+    @media (max-width: 480px) {
+        flex-direction: column;
+    }
+    >div {
+        width: 40%;
+        @media (max-width: 480px) {
+            width: 100%;
+        }
     }
 }

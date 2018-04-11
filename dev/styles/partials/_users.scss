@@ -3,6 +3,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    border-bottom: 1px solid $main-grey;
     div {
         text-align: center;
         color: $main-dark;

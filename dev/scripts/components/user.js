@@ -4,7 +4,7 @@ import React, { Component} from 'react';
 const User = (props) => {
         return(
             <div key={props.user.id}>
-                <p>{props.user.name}</p>
+                <p>{props.user.name!==''?props.user.name:'Anonymous User'}</p>
             </div>
         )
 }
