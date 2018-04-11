@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { DragAndDrop } from 'simple-react-dnd';
 import ItemsList from './components/itemsList';
 import Users from './components/users';
 import BoxList from './components/boxList';
